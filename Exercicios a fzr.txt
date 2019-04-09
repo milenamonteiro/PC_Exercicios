@@ -6,6 +6,6 @@ Maçã		1,80		1,50
 Laranja		0,99		0,95
 Banana		2,30		2,00
 
-Se o cliente comprar mais de 8kgs em fruta ou o valor total ultrapassar R$25 ele receberá um desconto de 10% sobre esse total se o mesmo for pago em dinheiro. Para pagamentos com débito o valor a ser pago não sofreá alteração. Se for pago com cartão de crédito receberá acréscimo de 2%.
+Se o cliente comprar mais de 8kgs em fruta ou o valor total ultrapassar R$25 ele receberá um desconto de 10% sobre esse total se o mesmo for pago em dinheiro. Para pagamentos com débito o valor a ser pago não sofrerá alteração. Se for pago com cartão de crédito receberá acréscimo de 2%.
 
 2) A prefeitura de uma cidade deseja fazer uma pesquisa entre seus habitantes. Faça um programa para coletar dados sobre o salário e o número de filhos de cada habitante e apresentar: a média de salário da população, a média do número de filhos e a porcentagem de pessoas que recebem apenas o salário mínimo (R$1.108).

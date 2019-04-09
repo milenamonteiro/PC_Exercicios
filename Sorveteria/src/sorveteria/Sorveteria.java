@@ -49,12 +49,12 @@ public class Sorveteria extends JFrame implements ActionListener {
             preco[i] = new JLabel("R$ " + NF1.format(precodecada[i]), javax.swing.SwingConstants.CENTER);
         }
 
-        for (int i = 0; i < preco.length; i++) {
-            precounit[i] = new JLabel("", javax.swing.SwingConstants.CENTER);
-        }
-
         for (int i = 0; i <= 6; i++) {
             qtd[i] = new JTextField();
+        }
+
+        for (int i = 0; i < preco.length; i++) {
+            precounit[i] = new JLabel("", javax.swing.SwingConstants.CENTER);
         }
 
         getContentPane().setLayout(new GridLayout(9, 4));
