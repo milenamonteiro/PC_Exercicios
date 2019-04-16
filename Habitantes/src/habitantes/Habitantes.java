@@ -4,11 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.text.NumberFormat;
+import java.util.*;
+
 
 public class Habitantes extends JFrame implements ActionListener {
 
     JPanel P1, P2, P3;
     NumberFormat NF1;
+    int ID = 1;
     //P1
     JLabel lblHabitante, lblNumHabitante, lblSalario, lblNumFilhos;
     JTextField txtSalario, txtNumFilhos;
@@ -18,8 +21,10 @@ public class Habitantes extends JFrame implements ActionListener {
     JLabel resultMediaSalario, resultMediaNumFilhos, resultPorcSalarioMin;
     //P3
     JTable tabela;
-    String coluna[] = {"ID", "Salário", "Número de filhos"};
-
+    Vector<String> coluna = new Vector<String>();
+    Vector<Vector> linhas = new Vector<Vector>();
+    Vector<Vector<Vector>> listLinhas = new Vector<Vector<Vector>>();
+    
     public static void main(String[] args) {
         JFrame janela = new Habitantes();
         janela.setUndecorated(true);
@@ -84,10 +89,14 @@ public class Habitantes extends JFrame implements ActionListener {
         P2.add(lblPorcSalarioMin);
         P2.add(resultPorcSalarioMin);
 
-        tabela = new JTable(valores, coluna);
+        coluna.addElement("ID");
+        coluna.addElement("Salário");
+        coluna.addElement("Número de filhos");
+
+        tabela = new JTable(linhas, coluna);
         tabela.setBounds(30, 40, 200, 300);
         JScrollPane sp = new JScrollPane(tabela);
-        
+
         P3.add(sp);
 
         getContentPane().add(P1);
@@ -96,7 +105,18 @@ public class Habitantes extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == addHab) {
+            try {
+               
+               
+               
+               for(int i = 0; i < listLinhas.size(); i++){
+                   
+               }
+            } catch (NumberFormatException erro) {
 
+            }
+        }
     }
 
 }
