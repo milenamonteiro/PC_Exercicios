@@ -4,14 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.text.NumberFormat;
-import java.util.*;
-
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class Habitantes extends JFrame implements ActionListener {
 
     JPanel P1, P2, P3;
-    NumberFormat NF1;
-    int ID = 1;
+    NumberFormat NF1, NF2;
     //P1
     JLabel lblHabitante, lblNumHabitante, lblSalario, lblNumFilhos;
     JTextField txtSalario, txtNumFilhos;
@@ -20,11 +19,9 @@ public class Habitantes extends JFrame implements ActionListener {
     JLabel lblMediaSalario, lblMediaNumFilhos, lblPorcSalarioMin;
     JLabel resultMediaSalario, resultMediaNumFilhos, resultPorcSalarioMin;
     //P3
-    JTable tabela;
-    Vector<String> coluna = new Vector<String>();
-    Vector<Vector> linhas = new Vector<Vector>();
-    Vector<Vector<Vector>> listLinhas = new Vector<Vector<Vector>>();
-    
+    JTable tabela = new JTable();
+    DefaultTableModel dtm = new DefaultTableModel(0, 0);
+
     public static void main(String[] args) {
         JFrame janela = new Habitantes();
         janela.setUndecorated(true);
@@ -43,6 +40,9 @@ public class Habitantes extends JFrame implements ActionListener {
         NF1 = NumberFormat.getNumberInstance();
         NF1.setMinimumFractionDigits(2);
 
+        NF2 = NumberFormat.getNumberInstance();
+        NF2.setMinimumFractionDigits(1);
+
         P1 = new JPanel();
         P2 = new JPanel();
         P3 = new JPanel();
@@ -53,8 +53,8 @@ public class Habitantes extends JFrame implements ActionListener {
         P3.setLayout(new FlowLayout(FlowLayout.CENTER));
         P3.setBackground(Color.WHITE);
 
-        lblHabitante = new JLabel("Habitante ");
-        lblNumHabitante = new JLabel();
+        lblHabitante = new JLabel("Habitante: ");
+        lblNumHabitante = new JLabel("" + 1);
         lblSalario = new JLabel("Salário ");
         lblNumFilhos = new JLabel("Número de filhos ");
 
@@ -89,11 +89,10 @@ public class Habitantes extends JFrame implements ActionListener {
         P2.add(lblPorcSalarioMin);
         P2.add(resultPorcSalarioMin);
 
-        coluna.addElement("ID");
-        coluna.addElement("Salário");
-        coluna.addElement("Número de filhos");
+        String colunas[] = new String[]{"ID", "Salário", "Número de filhos"};
 
-        tabela = new JTable(linhas, coluna);
+        dtm.setColumnIdentifiers(colunas);
+        tabela.setModel(dtm);
         tabela.setBounds(30, 40, 200, 300);
         JScrollPane sp = new JScrollPane(tabela);
 
@@ -104,17 +103,47 @@ public class Habitantes extends JFrame implements ActionListener {
         getContentPane().add(P3);
     }
 
+    int ID;
+    ArrayList<Integer> numfilhos = new ArrayList<Integer>();
+    ArrayList<Double> salario = new ArrayList<Double>();
+    double mediasalario, somasalarios, medianumfilhos, mediasalariomin;
+    int somanumfilhos, habsalmin;
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addHab) {
             try {
-               
-               
-               
-               for(int i = 0; i < listLinhas.size(); i++){
-                   
-               }
-            } catch (NumberFormatException erro) {
+                somasalarios = 0;
+                somanumfilhos = 0;
+                ID++;
+                dtm.addRow(new Object[]{ID, txtSalario.getText(), txtNumFilhos.getText()});
+                ID--;
+                numfilhos.add(Integer.parseInt(txtNumFilhos.getText()));
+                salario.add(Double.parseDouble(txtSalario.getText()));
+                ID++;
 
+                for (Double d : salario) {
+                    somasalarios += d;
+                }
+                for (Integer i : numfilhos) {
+                    somanumfilhos += i;
+                }
+                for (Double item : salario) {
+                    if (item >= 1008) {
+                        habsalmin++;
+                    }
+                }
+
+                mediasalario = (somasalarios / ID);
+                medianumfilhos = (somanumfilhos / ID);
+                mediasalariomin = (habsalmin / ID);
+
+                resultMediaSalario.setText("R$ " + NF1.format(mediasalario));
+                resultMediaNumFilhos.setText("" + NF2.format(medianumfilhos));
+                resultPorcSalarioMin.setText("" + NF2.format(mediasalariomin));
+                lblNumHabitante.setText("" + ID);
+
+            } catch (ArrayIndexOutOfBoundsException erro) {
+                lblMediaSalario.setText("" + erro);
             }
         }
     }
