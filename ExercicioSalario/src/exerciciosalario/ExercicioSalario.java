@@ -31,7 +31,7 @@ public class ExercicioSalario extends JFrame implements ActionListener {
         setTitle("Calculando seu desespero");
         setBounds(600, 300, 600, 300);
         getContentPane().setBackground(new Color(150,150,150));
-        getContentPane().setLayout(new GridLayout(4,1));
+        getContentPane().setLayout(new GridLayout(8,8));
         
         NF1 = NumberFormat.getNumberInstance();
         NF1.setMinimumFractionDigits(2);

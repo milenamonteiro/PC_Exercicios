@@ -114,6 +114,7 @@ public class Habitantes extends JFrame implements ActionListener {
             try {
                 somasalarios = 0;
                 somanumfilhos = 0;
+                habsalmin = 0;
                 ID++;
                 dtm.addRow(new Object[]{ID, txtSalario.getText(), txtNumFilhos.getText()});
                 ID--;
@@ -128,23 +129,36 @@ public class Habitantes extends JFrame implements ActionListener {
                     somanumfilhos += i;
                 }
                 for (Double item : salario) {
-                    if (item >= 1008) {
+                    if (item == 1008) {
                         habsalmin++;
                     }
                 }
 
                 mediasalario = (somasalarios / ID);
                 medianumfilhos = (somanumfilhos / ID);
-                mediasalariomin = (habsalmin / ID);
+                mediasalariomin = ((habsalmin*100)/ID);
 
                 resultMediaSalario.setText("R$ " + NF1.format(mediasalario));
                 resultMediaNumFilhos.setText("" + NF2.format(medianumfilhos));
-                resultPorcSalarioMin.setText("" + NF2.format(mediasalariomin));
+                resultPorcSalarioMin.setText("" + NF2.format(mediasalariomin)+"%");
                 lblNumHabitante.setText("" + ID);
 
-            } catch (ArrayIndexOutOfBoundsException erro) {
-                lblMediaSalario.setText("" + erro);
+            } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "Caro usuário, digite somente números",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
             }
+        }
+        if(e.getSource() == limpar){
+            txtNumFilhos.setText("");
+            txtSalario.setText("");
+            resultMediaNumFilhos.setText("");
+            resultMediaSalario.setText("");
+            resultPorcSalarioMin.setText("");
+            dtm.setRowCount(0);
+            ID=0;
+            lblNumHabitante.setText(""+1);
+            salario.clear();
+            numfilhos.clear();
         }
     }
 
