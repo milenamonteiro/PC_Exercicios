@@ -1,0 +1,32 @@
+MainActivity
+
+onCreate => configureNextButton();
+
+fora
+
+private void configureNextButton(){
+Button nextButton = (Button) findViewById(R.id.nextButton);
+nextButton.setOnClickListener(new View.OnClickListener(){
+@Override
+public void onClick(View view){
+startActivity(new Intent(MainActivity.this, SecondActivity.class));
+}
+});
+}
+
+
+SecondActivity
+
+onCreate => configureBackButton();
+
+fora
+
+private void configureBackButton(){
+Button backButton = (Button) findViewById(R.id.backButton);
+backButton.setOnClickListener(new View.OnClickListener(){
+@Override
+public void onClick(View view){
+finish();
+}
+});
+}
